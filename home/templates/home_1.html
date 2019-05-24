@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load bootstrap%}
+{% load static %}
+
+{% block title %} Seja Bem Vindo {% endblock %}
+
+{% block main %}
+
+	<div class="row">
+	    <div class=".col-md-">
+		    <h1>Gestão de clientes</h1>
+
+			{{ result }}
+
+	    </div>
+	    <div class="col-sm">
+		    {% if user.is_authenticated %}
+		        <p>User: {{ user.username }}</p>
+		        <a href="{% url 'logout' %}" class="btn btn-secondary">Sair</a>
+		        <a href="{% url 'time' %}" class="btn btn-success">Get time</a>
+		        <a href="{%url 'person_list'%}" class="btn btn-info">Listar-Clientes</a>
+		    {% else %}
+		        <a href="{% url 'login' %}" class="btn btn-info">Entrar</a>
+		    {% endif %}
+
+
+	    </div>
+	</div>
+
+
+
+
+{% block footer %}
+
+	<footer class="footer">
+		<div class="container">
+			<span class="text-muted">Desenvolvimento web com Django by: Bernardo Vieira</span>
+		</div>
+	</footer>
+{%endblock%}
+{%endblock%}
+
+{% block image%}
+
+	<div class="text-center">
+        <img src="{% static 'index.png' %}" class="rounded" alt="...">
+	</div>
+{%endblock%}
+

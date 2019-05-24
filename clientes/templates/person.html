@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Administração {% endblock %}
+
+{% block main %}
+
+	<div class="col-6" align="center">
+		<h4 align="center">Listagem de clientes</h4>
+	</div>
+
+	{% if user.is_authenticated %}
+		<div align="right">
+		   <p>User: {{ user.username }}</p>
+        </div>
+	{%endif%}
+	<div>
+		<table style="width:100%">
+			<tr>
+				<td><a href="{% url 'home' %}" class="btn btn-secondary">
+					<i class="fas fa-home"></i>
+				</a></td>
+				<td>  </td>
+				<td align="right"><a href="{%url   'logout' %}">Sair
+					<i class="fas fa-sign-out-alt"></i>
+				</a></td>
+			</tr>
+		</table>
+	</div>
+	<ul>
+		{% for person in persons %}
+
+			<li class="list-group-item">
+				<a href="{% url 'person_update' person.id%}"> {{ person.first_name }}</a>
+				<a href="{% url 'person_delete' person.id%}" class="trash-item">
+					<i class="fas fa-trash"></i>
+				</a>
+
+			</li>
+
+		{% endfor %}
+	</ul>
+
+	<br>
+
+	<a href="{% url 'person_new' %}">New client
+		<i class="fas fa-plus-circle"></i>
+	</a>
+
+
+
+{% block footer %}
+	<footer class="footer">
+		<div class="container">
+			<span class="text-muted">Desenvolvimento web com Django by: Bernardo Vieira</span>
+		</div>
+	</footer>
+{%endblock%}
+
+{%endblock%}
+
+
+
+
+
+
+
+
+
