@@ -29,6 +29,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 ALLOWED_HOSTS = ['localhost','clientesbvr.herokuapp.com']
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
