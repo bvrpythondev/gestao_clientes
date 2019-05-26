@@ -6,25 +6,36 @@
 
 {% block main %}
 
-	<div class="row">
-	    <div class=".col-md-">
-		    <h1>Gestão de clientes</h1>
+<style>
+	#darkcyantitle{
+		color: darkcyan;
 
-			{{ result }}
+	}
+	#user {
+		alignment: right;
+		color: purple;
+	}
 
-	    </div>
+</style>
+
+
+	    <div class=".col-md-2">
+		    <h1 id="darkcyantitle">Gestão de clientes</h1>
+			</div>
+
+
 	    <div class="col-sm">
 		    {% if user.is_authenticated %}
-		        <p>User: {{ user.username }}</p>
-		        <a href="{% url 'logout' %}" class="btn btn-secondary">Sair</a>
-		        <a href="{% url 'time' %}" class="btn btn-success">Get time</a>
-		        <a href="{%url 'person_list'%}" class="btn btn-info">Listar-Clientes</a>
+				<p align="right" class="user" id="user">User: {{ user.username }}</p>
+		        <a  href="{% url 'logout' %}"  class="btn btn-secondary">Sair</a>
+		        <a href="{% url 'time' %}"  class="btn btn-success">Get time</a>
+		        <a href="{%url 'person_list'%}"  class="btn btn-info">Clientes</a>
 		    {% else %}
-		        <a href="{% url 'login' %}" class="btn btn-info">Entrar</a>
+		        <a href="{% url 'login' %}"  class="btn btn-info">Entrar</a>
 		    {% endif %}
 
 
-	    </div>
+
 	</div>
 
 

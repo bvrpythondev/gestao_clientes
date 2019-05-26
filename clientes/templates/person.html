@@ -1,16 +1,65 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} Administração {% endblock %}
+
+{% block title %}
+
+Clients List
+
+
+{% endblock %}
 
 {% block main %}
 
+<style>
+	#pesquisa {
+		margin-top: 40px;
+	}
+	#pesquisabutton {
+		margin-top: 30px;
+	}
+	#title {
+		color:  darkcyan;
+	}
+	#trash-item {
+		color: red;
+	}
+	#exit-item {
+		color: red;
+	}
+	#user {
+		color: purple;
+	}
+</style>
+
 	<div class="col-6" align="center">
-		<h4 align="center">Listagem de clientes</h4>
+		<h4 align="center" class="title" id="title">Listagem de clientes</h4>
 	</div>
+
+	<div class="row" >
+		<div class="col-12">
+			<form class="form-inline" >
+
+ 				 <div class="form-group mx-sm-3 mb-2">
+					 <input type="text" class="form-control" id="pesquisa" name="pesquisa" placeholder="Digite sua Busca">
+  				</div>
+  			<button type="submit" id="pesquisabutton" name="pesquisabutton" class="btn btn-success">Search</button>
+			</form>
+
+
+
+
+		</div>
+	</div>
+
+<!--	 <div class="form-group mb-2">
+					 <label for="staticEmail2" class="sr-only">Email</label>
+    				 <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Pesquisa">
+  				</div>-->
+
 
 	{% if user.is_authenticated %}
 		<div align="right">
-		   <p>User: {{ user.username }}</p>
+		   <p id="user">User: {{ user.username }}</p>
         </div>
 	{%endif%}
 	<div>
@@ -20,7 +69,7 @@
 					<i class="fas fa-home"></i>
 				</a></td>
 				<td>  </td>
-				<td align="right"><a href="{%url   'logout' %}">Sair
+				<td align="right"><a href="{%url   'logout' %}" id="exit-item">Sair
 					<i class="fas fa-sign-out-alt"></i>
 				</a></td>
 			</tr>
@@ -31,7 +80,7 @@
 
 			<li class="list-group-item">
 				<a href="{% url 'person_update' person.id%}"> {{ person.first_name }}</a>
-				<a href="{% url 'person_delete' person.id%}" class="trash-item">
+				<a href="{% url 'person_delete' person.id%}" id="trash-item" class="trash-item">
 					<i class="fas fa-trash"></i>
 				</a>
 
@@ -42,7 +91,7 @@
 
 	<br>
 
-	<a href="{% url 'person_new' %}">New client
+	<a href="{% url 'person_new' %}" id="btn" class="btn btn-info">New client
 		<i class="fas fa-plus-circle"></i>
 	</a>
 
@@ -51,7 +100,7 @@
 {% block footer %}
 	<footer class="footer">
 		<div class="container">
-			<span class="text-muted">Desenvolvimento web com Django by: Bernardo Vieira</span>
+			<span class="text-muted">Desenvolvimento web com Django by: Bernardo</span>
 		</div>
 	</footer>
 {%endblock%}
