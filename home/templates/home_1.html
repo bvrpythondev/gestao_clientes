@@ -6,37 +6,45 @@
 
 {% block main %}
 
-<style>
-	#darkcyantitle{
-		color: darkcyan;
-
-	}
-	#user {
-		alignment: right;
-		color: purple;
-	}
-
-</style>
-
 
 	    <div class=".col-md-2">
 		    <h1 id="darkcyantitle">Gestão de clientes</h1>
 			</div>
 
+<nav id="navbar1" class="navbar navbar-expand-lg navbar-light"  >
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-	    <div class="col-sm">
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'time' %}" style="color: green;">Time <span class="sr-only">(current)</span>
+		<i class="fas fa-clock"></i>
+		</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{%url 'person_list'%}" style="color: rebeccapurple;" >Clientes
+			<i class="fas fa-users"></i></a>
+      </li><li class="nav-item" >
+        <a class="nav-link disabled" id="user"  aria-disabled="true">{% if user.is_authenticated %}{{ user.username }}<i class="fas fa-user-shield"></i>{%endif%}
+
+		</a>
+      </li>
+    </ul>
+
+  </div>
+</nav>
+
+
+	    <div class="col-sm" align="right">
 		    {% if user.is_authenticated %}
-				<p align="right" class="user" id="user">User: {{ user.username }}</p>
-		        <a  href="{% url 'logout' %}"  class="btn btn-secondary">Sair</a>
-		        <a href="{% url 'time' %}"  class="btn btn-success">Get time</a>
-		        <a href="{%url 'person_list'%}"  class="btn btn-info">Clientes</a>
+		        <a style="alignment: right; margin-top: 20px;" href="{% url 'logout' %}"  class="btn btn-secondary">Sair
+					<i class="fas fa-sign-out-alt"></i></a>
 		    {% else %}
-		        <a href="{% url 'login' %}"  class="btn btn-info">Entrar</a>
+		        <a href="{% url 'login' %}"  style="alignment: right; margin-top: 20px;" class="btn btn-info">Entrar</a>
 		    {% endif %}
-
-
-
-	</div>
+		</div>
 
 
 

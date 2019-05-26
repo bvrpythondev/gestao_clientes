@@ -10,68 +10,44 @@ Clients List
 
 {% block main %}
 
-<style>
-	#pesquisa {
-		margin-top: 40px;
-	}
-	#pesquisabutton {
-		margin-top: 30px;
-	}
-	#title {
-		color:  darkcyan;
-	}
-	#trash-item {
-		color: red;
-	}
-	#exit-item {
-		color: red;
-	}
-	#user {
-		color: purple;
-	}
-</style>
 
-	<div class="col-6" align="center">
-		<h4 align="center" class="title" id="title">Listagem de clientes</h4>
+
+
+	<div class="col-12" align="center">
+		<h3 align="center" class="title" id="title">Listagem de clientes</h3>
 	</div>
 
-	<div class="row" >
-		<div class="col-12">
-			<form class="form-inline" >
+<nav id="navbar" class="navbar navbar-expand-lg navbar-light" style="border: solid 2px; -webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px; border-color: darkcyan;"  >
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
- 				 <div class="form-group mx-sm-3 mb-2">
-					 <input type="text" class="form-control" id="pesquisa" name="pesquisa" placeholder="Digite sua Busca">
-  				</div>
-  			<button type="submit" id="pesquisabutton" name="pesquisabutton" class="btn btn-success">Search</button>
-			</form>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}" id="home">Home <span class="sr-only">(current)</span>
+			<i class="fas fa-home"></i>
+		</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{%url 'logout' %}" id="exit-item">Sair
+			<i class="fas fa-sign-out-alt"></i></a>
+      </li><li class="nav-item">
+        <a class="nav-link disabled" id="user"  tabindex="-1" aria-disabled="true">{% if user.is_authenticated %}
+		{{ user.username }} {%endif%}
+		</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" id="pesquisa" name="pesquisa" type="search" placeholder="Search">
+      <button id="pesquisabutton" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
 
 
 
 
-		</div>
-	</div>
-
-
-
-
-	{% if user.is_authenticated %}
-		<div align="right">
-		   <p id="user">User: {{ user.username }}</p>
-        </div>
-	{%endif%}
-	<div>
-		<table style="width:100%">
-			<tr>
-				<td><a href="{% url 'home' %}" class="btn btn-secondary">
-					<i class="fas fa-home"></i>
-				</a></td>
-				<td>  </td>
-				<td align="right"><a href="{%url   'logout' %}" id="exit-item">Sair
-					<i class="fas fa-sign-out-alt"></i>
-				</a></td>
-			</tr>
-		</table>
-	</div>
 	<ul>
 		{% for person in persons %}
 
@@ -96,7 +72,7 @@ Clients List
 
 {% block footer %}
 	<footer class="footer">
-		<div class="container">
+		<div class="container" >
 			<span class="text-muted">Desenvolvimento web com Django by: Bernardo</span>
 		</div>
 	</footer>
