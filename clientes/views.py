@@ -11,7 +11,7 @@ def person_list(request):
 
     if termo_busca:
         persons = Person.objects.all()
-        persons = persons.filter(first_name=termo_busca)
+        persons = persons.filter(first_name__icontains=termo_busca)
     else:
         persons = Person.objects.all()
 
