@@ -1,10 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+
+Clients List
+
+
+{% endblock %}
+
+{% block main %}
+
+<div class="col-12" align="center">
+		<h3 align="center" class="title" id="title">Listagem de clientes</h3>
+		<span style="color: green;">Using: List-View</span>
+	</div>
+
+<br>
+
+<ul>
+
+    {% for person in object_list %}
+
+        <li class="list-group-item">
+            <a href="{% url 'person_update' person.id%}"> {{ person.first_name }}</a>
+				<a href="{% url 'person_delete' person.id%}" id="trash-item" class="trash-item">
+					<i class="fas fa-trash"></i>
+				</a>
+
+        </li>
+
+    {% endfor%}
+</ul>
+
+<br>
+
+	<a href="{% url 'person_new' %}" id="btn" class="btn btn-info">New client
+		<i class="fas fa-plus-circle"></i>
+	</a>
+
+
+
+
+{% block footer %}
+	<footer class="footer">
+		<div class="container" align="center">
+			<span class="text-muted">Desenvolvimento web com Django by: Bernardo</span>
+		</div>
+	</footer>
+{%endblock%}
+
+{%endblock%}

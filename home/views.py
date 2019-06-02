@@ -1,17 +1,16 @@
 from django.shortcuts import render
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponse
 from django.contrib.auth import logout
 import datetime
 from django.utils.timezone import utc
+from django.views.generic.base import  TemplateView
+from django.views import View
 
-def calcular(v1,v2):
-    return v1 / v2
+
+
 
 def home(request):
-    value1 = 10
-    value2 = 20
-    res = calcular(value1,value2)
-    return render(request,'home_1.html',{'result':res})
+    return render(request,'home_1.html')
 
 def my_logout(request):
     logout(request)
@@ -23,5 +22,24 @@ def time(request):
     now.strftime('%H:%M:%S')
     return render(request,'time1.html',{'myDate':now})
 
-def teste(request):
-    return render(request,'images.html')
+
+
+class HomePageView(TemplateView):
+    template_name = 'home_3.html'
+
+    def post(self,request,**kwargs):
+        return HttpResponse('Post')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['minha_variavel'] = 'Hello Welcome to Django'
+        return context
+
+
+class MyView(View):
+    def get(self,request,*args,**kwargs):
+        return render(request,'home_3.html')
+
+    def post(self,request,*args,**kwargs):
+        return HttpResponse('Post')
+

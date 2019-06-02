@@ -3,6 +3,7 @@ from .views import person_new
 from django.urls import path
 from .views import person_update
 from .views import person_delete
+from .views import PersonList
 
 
 urlpatterns = [
@@ -10,5 +11,7 @@ urlpatterns = [
     path("new/",person_new,name="person_new"),
     path("update/<int:id>/",person_update,name="person_update"),
     path("delete/<int:id>/",person_delete,name="person_delete"),
+    path("delete/<int:id>/",person_delete,name="person_delete"),
+    path("person_list/",PersonList.as_view()),
 
 ]

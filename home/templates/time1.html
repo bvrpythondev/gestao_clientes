@@ -1,15 +1,33 @@
-<!doctype html>
-<html lang="">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport"
-	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Document</title>
-</head>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+
+Time Clock
+
+
+{% endblock %}
+
+{% block main %}
 <body>
 
-	<h1>{{ myDate | date:"D d M Y"}}</h1>
+
+	<h1 align="center">Real Clock RTC</h1>
+	<div class="col-8" style="margin-top: 30px;" align="right">
+	<h2 align="right">{{myDate}}</h2>
+	</div>
+
+	<a href="{% url 'home' %}" class="btn btn-success" >Voltar</a>
 
 </body>
-</html>
+
+
+{% block footer %}
+	<footer class="footer">
+		<div class="container" align="center" >
+			<span class="text-muted">Desenvolvimento web com Django by:Bernardo</span>
+		</div>
+	</footer>
+{%endblock%}
+
+{%endblock%}
