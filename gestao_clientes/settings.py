@@ -26,8 +26,9 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['localhost','clientesbvr.herokuapp.com']
+ALLOWED_HOSTS = ['localhost','127.0.0.1','clientesbvr.herokuapp.com']
 
+INTERNAL_IPS = ['localhost','127.0.0.1']
 
 
 # Application definition
@@ -42,7 +43,9 @@ INSTALLED_APPS = [
     'bootstrapform',
     'clientes',
     'home',
+    'debug_toolbar',
 ]
+#debug tool bar needs to be the last one
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -52,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'gestao_clientes.urls'

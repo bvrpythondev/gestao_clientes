@@ -26,7 +26,7 @@
 		</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="{%url 'person_list'%}" style="color: rebeccapurple;" >Clientes
+        <a class="nav-link" href="{%url 'person_list_cbv'%}" style="color: rebeccapurple;" >Clientes
 			<i class="fas fa-users"></i></a>
       </li>
 
@@ -64,13 +64,9 @@
 
 
 {% block footer %}
-
-	<footer class="footer">
-		<div class="container"  align="center">
-			<span class="text-muted">Desenvolvimento web com Django by:Bernardo</span>
-		</div>
-	</footer>
+	{% include 'footer.html' %}
 {%endblock%}
+
 {%endblock%}
 
 {% block image%}

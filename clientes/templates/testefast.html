@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+
+Clients List
+
+
+{% endblock %}
+
+{% block main %}
+
+
+<div class="col-12" align="center">
+		<h3 align="center" class="title" id="title">Listagem de produtos</h3>
+
+	</div>
+
+
+<br>
+
+<ul>
+
+    {% for produto in database %}
+
+        <li class="list-group-item">
+            {{ produto.descricao|upper }}
+        </li>
+	{% empty %}
+		<li>Sorry, no products found.</li>
+
+    {% endfor%}
+</ul>
+
+<br>
+
+
+{% block footer %}
+	{% include 'footer.html' %}
+{%endblock%}
+
+
+{%endblock%}

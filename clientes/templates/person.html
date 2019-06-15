@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
+{% load filters %}
 {% load static %}
+{% load my_tags %}
+
+
 
 {% block title %}
 
@@ -11,8 +15,6 @@ Clients List
 {% block main %}
 
 
-
-
 	<div class="col-12" align="center">
 		<h3 align="center" class="title" id="title">Listagem de clientes</h3>
 	</div>
@@ -21,6 +23,8 @@ Clients List
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+  </button>
+
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -67,12 +71,15 @@ Clients List
 		{% for person in persons %}
 
 			<li class="list-group-item">
-				<a href="{% url 'person_update' person.id%}"> {{ person.first_name }}</a>
+				<a href="{% url 'person_update' person.id%}"> {{ person.nome_completo|upper }}</a>
 				<a href="{% url 'person_delete' person.id%}" id="trash-item" class="trash-item">
 					<i class="fas fa-trash"></i>
 				</a>
 
 			</li>
+        {% empty %}
+
+            <li>Sorry, no persons was found.</li>
 
 		{% endfor %}
 	</ul>
@@ -84,13 +91,8 @@ Clients List
 	</a>
 
 
-
 {% block footer %}
-	<footer class="footer">
-		<div class="container" align="center" >
-			<span class="text-muted">Desenvolvimento web com Django by: Bernardo</span>
-		</div>
-	</footer>
+	{% include 'footer.html' %}
 {%endblock%}
 
 {%endblock%}
