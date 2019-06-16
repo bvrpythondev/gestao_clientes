@@ -4,8 +4,18 @@ from .models import Produto
 from .models import Documento,Venda
 
 class PersonAdmin(admin.ModelAdmin):
-    fields = ('first_name','last_name','age','salary','doc','bio','photo')
+    fieldsets = (
+        ('Dados pessoais',{'fields':('first_name','last_name','age','doc')}),
+        ('Dados complemtares',{"fields":('salary','bio','photo')}),
+    )
+
+    list_filter = ('age','salary')
+
+    #fields = ('first_name','last_name','age','salary','doc','bio','photo')
     list_display = ('first_name','last_name','age','salary','doc','bio','photo')
+
+
+
 
 # Register your models here.
 admin.site.register(Person,PersonAdmin)
