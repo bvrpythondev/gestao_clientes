@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect,HttpResponse
 from django.shortcuts import get_object_or_404
-from .models import Person,Produto,Venda,Documento
+from .models import Person
+from vendas.models import Venda
+from produtos.models import Produto
 from .forms import PersonForm
 from django.contrib.auth.decorators import login_required
 from django.views.generic.list import ListView
@@ -78,6 +80,7 @@ class PersonList(ListView):
 class PersonDetail(DetailView):
     model = Person
 
+
     def get_object(self, queryset=None):
         pk = self.kwargs.get(self.pk_url_kwarg)
         return Person.objects.select_related('doc').get(id=pk)
@@ -93,7 +96,7 @@ class PersonDetail(DetailView):
 
 class PersonCreate(CreateView):
     model = Person
-    fields = ['first_name','last_name','age','salary','bio','photo']
+    fields = ['first_name','last_name','age','salary','bio','photo','doc']
 
     def get_success_url(self):
         return  reverse_lazy('person_list_cbv')
