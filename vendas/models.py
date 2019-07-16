@@ -4,17 +4,27 @@ from django.dispatch import receiver
 from clientes.models import Person
 from produtos.models import Produto
 from django.db.models import Sum, F, FloatField, Max
+from .managers import VendaManager
 
 
 
 class Venda(models.Model):
-
-    numero = models.CharField(max_length=7)
+    numero = models.CharField(max_length=8)
     valor = models.DecimalField(max_digits=5,decimal_places=2,null=True,blank=True)
     desconto = models.DecimalField(max_digits=5,decimal_places=2,default=0)
     impostos = models.DecimalField(max_digits=5,decimal_places=2,default=0)
-    pessoa = models.ForeignKey(Person,null=True,blank=True,on_delete=models.PROTECT)
+    client = models.ForeignKey(Person, null=True, blank=True, on_delete=models.PROTECT)
     nfe_emitida = models.BooleanField(default=False)
+    objects = VendaManager()
+
+
+    class Meta:
+        permissions = (
+            ('set_nfe','Alterar o valor da NF-e'),
+            ('permissao2','Permissao 2'),
+            ('permissao3','Persmissao 3'),
+        )
+
 
     def get_total(self):
         tot = self.itemdopedido_set.all().aggregate(
@@ -22,7 +32,10 @@ class Venda(models.Model):
         )['tot_ped'] or 0
 
 
-        tot = tot - float(self.impostos) - float(self.desconto)
+
+
+
+        tot = tot + float(self.impostos) - float(self.desconto)
 
 
         self.valor = tot

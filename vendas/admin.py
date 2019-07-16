@@ -9,10 +9,10 @@ class ItemPedidoInline(admin.TabularInline):
 
 class VendaAdmin(admin.ModelAdmin):
     readonly_fields = ('valor',)
-    autocomplete_fields = ('pessoa',)
-    list_filter = ('pessoa__doc',)
-    search_fields = ("id",'pessoa__first_name','pessoa__doc__num_doc')
-    list_display = ('pessoa','id','nfe_emitida')
+    autocomplete_fields = ('client',)
+    list_filter = ('client__doc',)
+    search_fields = ("id",'client__first_name','client__doc__num_doc')
+    list_display = ('client','id','nfe_emitida')
     actions = [nfe_emitida,nfe_nao_emitida]
     inlines = [ItemPedidoInline]
 

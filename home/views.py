@@ -43,3 +43,6 @@ class MyView(View):
     def post(self,request,*args,**kwargs):
         return HttpResponse('Post')
 
+
+def litest(request):
+    return render(request,'litest.html')

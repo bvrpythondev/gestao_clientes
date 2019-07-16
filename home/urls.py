@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import my_logout,HomePageView,time,home,MyView
 from django.views.generic.base import  TemplateView
-
+from .views import  litest
 
 urlpatterns = [
     path('',home,name="home"),
@@ -19,6 +19,8 @@ urlpatterns = [
 
     #View simples para usos pequenos e simples
     path('view/',MyView.as_view()),
+
+    path('litest/',litest,name='litest')
 
 
 

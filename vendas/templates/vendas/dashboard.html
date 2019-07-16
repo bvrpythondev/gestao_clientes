@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+
+
+
+{% block title %}Dashboard{% endblock %}
+
+
+{% block main2 %}
+
+<div class="col-12" align="center">
+		<h1 align="center" class="title" id="title">Dashboard</h1>
+	</div>
+
+
+<a href="{% url 'TemplateView'%}" style="margin-top: 100px" class="btn btn-success">Voltar</a>
+
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', {packages: ['corechart']});
+    google.charts.setOnLoadCallback(drawChartQTNFe);
+    google.charts.setOnLoadCallback(drawChartTicketMedio);
+    google.charts.setOnLoadCallback(drawChartDescontoMedio);
+
+    function drawChartQTNFe() {
+
+      var numPed = "{{my_data.n_ped_nfe}}";
+
+      var numPend = "{{my_data.n_ped}}";
+
+
+      // Define the chart to be drawn.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Element');
+      data.addColumn('number', 'Percentage');
+      data.addRows([
+        ['NF-e', parseInt(numPed)],
+        ['NF-e pendente', parseInt(numPend) - parseInt(numPed)]
+      ]);
+
+      var options = {
+        title: "Nf-e Values",
+        width: 300,
+        height: 300,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" }
+      };
+
+      // Instantiate and draw the chart.
+      var chart = new google.visualization.PieChart(document.getElementById('NFeChart'));
+      chart.draw(data, options);
+    }
+
+     function drawChartTicketMedio() {
+
+      var max = "{{my_data.max}}";
+
+      var min = "{{my_data.min}}";
+
+      var med = "{{my_data.media}}";
+
+      var data = google.visualization.arrayToDataTable([
+        ["Element", "Density", { role: "style" } ],
+        ["Minimum", parseFloat(min), "silver"],
+        ["Average",  parseFloat(med), "#99c2ff"],
+        ["Maximum", parseFloat(max), "green"]
+
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Ticket Values",
+        width: 300,
+        height: 300,
+        bar: {groupWidth: "85%"},
+        legend: { position: "none" }
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("TicketChart"));
+      chart.draw(view, options);
+  }
+
+     function drawChartDescontoMedio() {
+
+      var max = "{{my_data.max_desc}}";
+
+      var min = "{{my_data.min_desc}}";
+
+      var med = "{{my_data.media_desc}}";
+
+      var data = google.visualization.arrayToDataTable([
+        ["Element", "Density", { role: "style" } ],
+        ["Minimum", parseFloat(min), "silver"],
+        ["Average",  parseFloat(med), "#99c2ff"],
+        ["Maximum", parseFloat(max), "green"]
+
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Discount Values",
+        width: 300,
+        height: 300,
+        bar: {groupWidth: "85%"},
+        legend: { position: "none" }
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("DescontoChart"));
+      chart.draw(view, options);
+  }
+
+  </script>
+
+  <!-- Identify where the chart should be drawn. -->
+
+<div style="float: left; margin-left: 200px; margin-top: 175px " id="TicketChart"></div>
+
+<div style="float: left;  margin-top: 175px " id="NFeChart"></div>
+<div style="float:  left;  margin-top: 175px "   id="DescontoChart"></div>
+
+
+
+{% endblock %}
+
+<br>
+<br>
+
+{% block footer %}
+	{% include 'footer.html' %}
+{%endblock%}
